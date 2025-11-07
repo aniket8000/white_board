@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import  { useState, useCallback, useEffect } from "react";
 import Toolbar from "./components/Toolbar";
 import CanvasBoard from "./components/CanvasBoard";
 import PageToolbar from "./components/PageToolbar";

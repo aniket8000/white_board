@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import type { Tool, Shape } from "../types/shapes";
 import { drawShape, hitTest, measureText } from "../utils/drawUtils";
 import { createShape } from "../services/api";
@@ -133,7 +133,12 @@ export default function CanvasBoard({ tool, shapes, setShapes, textStyle }: Prop
 
     if (preview.type === "pencil") {
       setPreview((prev) =>
-        prev ? { ...prev, points: [...(prev.points || []), { x, y }] } : prev
+        prev
+          ? {
+              ...(prev as any),
+              points: [...(((prev as any).points || []) as any[]), { x, y }],
+            }
+          : prev
       );
     } else if (preview.type === "line" || preview.type === "arrow") {
       setPreview((prev) => (prev ? { ...prev, x2: x, y2: y } : prev));
@@ -154,7 +159,7 @@ export default function CanvasBoard({ tool, shapes, setShapes, textStyle }: Prop
 
     // basic size calculations
     if (final.type === "pencil") {
-      const pts = final.points || [];
+      const pts = (final as any).points || [];
       const xs = pts.map((p: any) => p.x);
       const ys = pts.map((p: any) => p.y);
       final.x = Math.min(...xs);
