@@ -1,0 +1,59 @@
+# ==============================
+# 🌐 General
+# ==============================
+.DS_Store
+Thumbs.db
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+package-lock.json
+
+# ==============================
+# 🧠 Node / Backend
+# ==============================
+node_modules/
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# backend build/output
+backend/dist/
+backend/build/
+backend/node_modules/
+backend/.env
+backend/.DS_Store
+
+# ==============================
+# 🎨 Frontend (Vite / React)
+# ==============================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.DS_Store
+
+# Vite cache
+frontend/.vite/
+frontend/.cache/
+
+# ==============================
+# 🧰 Editor / OS junk
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# ==============================
+# 📦 Misc
+# ==============================
+coverage/
+*.tgz
+*.zip
+*.tar
