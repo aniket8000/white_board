@@ -2,6 +2,7 @@ import React from "react";
 import ShapeButton from "./ShapeButton";
 import type { Tool } from "../types/shapes";
 
+// Props for the toolbar: tools, text style, and project title
 interface Props {
   currentTool: Tool;
   setTool: (t: Tool) => void;
@@ -18,6 +19,7 @@ interface Props {
     }>
   >;
   projectTitle?: string;
+  onAddPage?: (name: string) => void; // ✅ added so App.tsx stops type error
 }
 
 export default function Toolbar({
@@ -27,7 +29,6 @@ export default function Toolbar({
   setTextStyle,
   projectTitle,
 }: Props) {
-  // handle switching between tools
   const handleToolClick = (tool: Tool) => {
     setTool(currentTool === tool ? "select" : tool);
   };
@@ -45,7 +46,7 @@ export default function Toolbar({
         boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
       }}
     >
-      {/* left side: drawing tools */}
+      {/* === Left side: drawing tools === */}
       <div
         style={{
           display: "flex",
@@ -99,7 +100,7 @@ export default function Toolbar({
         </div>
       </div>
 
-      {/* center: project name */}
+      {/* === Center: dynamic project name === */}
       <div
         style={{
           position: "absolute",
@@ -115,7 +116,7 @@ export default function Toolbar({
         {projectTitle || "Untitled Project"}
       </div>
 
-      {/* right side: text style tools */}
+      {/* === Right side: text styling controls === */}
       <div
         style={{
           display: "flex",
@@ -128,7 +129,6 @@ export default function Toolbar({
           boxShadow: "inset 0 0 3px rgba(0,0,0,0.05)",
         }}
       >
-        {/* text tool */}
         <ShapeButton
           active={currentTool === "text"}
           onClick={() => handleToolClick("text")}
@@ -137,10 +137,12 @@ export default function Toolbar({
           <i className="ri-font-size"></i>
         </ShapeButton>
 
-        {/* font family selector */}
+        {/* font family */}
         <select
           value={textStyle.fontFamily}
-          onChange={(e) => setTextStyle({ ...textStyle, fontFamily: e.target.value })}
+          onChange={(e) =>
+            setTextStyle({ ...textStyle, fontFamily: e.target.value })
+          }
           style={{
             border: "1px solid #ddd",
             borderRadius: "6px",
@@ -160,7 +162,9 @@ export default function Toolbar({
         <input
           type="color"
           value={textStyle.color}
-          onChange={(e) => setTextStyle({ ...textStyle, color: e.target.value })}
+          onChange={(e) =>
+            setTextStyle({ ...textStyle, color: e.target.value })
+          }
           style={{
             width: "30px",
             height: "30px",
@@ -171,7 +175,7 @@ export default function Toolbar({
           }}
         />
 
-        {/* font size dropdown */}
+        {/* font size */}
         <select
           value={textStyle.fontSize}
           onChange={(e) =>

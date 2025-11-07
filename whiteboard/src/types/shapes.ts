@@ -1,8 +1,9 @@
-export type Tool = 'select' | 'pencil' | 'line' | 'circle' | 'arrow' | 'text';
+export type Tool = "select" | "pencil" | "line" | "circle" | "arrow" | "text";
 
+// Common fields shared by all shapes
 export interface BaseShape {
   id: string;
-  type: 'pencil' | 'line' | 'circle' | 'arrow' | 'text';
+  type: "pencil" | "line" | "circle" | "arrow" | "text";
   x: number;
   y: number;
   width?: number;
@@ -13,28 +14,37 @@ export interface BaseShape {
   pageId?: string;
 }
 
+// Pencil shape keeps track of freehand points
 export interface PencilShape extends BaseShape {
-  type: 'pencil';
+  type: "pencil";
   points: { x: number; y: number }[];
 }
 
+// Line and arrow both have end coordinates
 export interface LineShape extends BaseShape {
-  type: 'line' | 'arrow';
+  type: "line" | "arrow";
   x2: number;
   y2: number;
 }
 
+// Circle has radius
 export interface CircleShape extends BaseShape {
-  type: 'circle';
+  type: "circle";
   radius: number;
 }
 
+// Text shape with styling
 export interface TextShape extends BaseShape {
-  type: 'text';
+  type: "text";
   content: string;
   fontSize?: number;
   fontFamily?: string;
   color?: string;
 }
 
-export type Shape = PencilShape | LineShape | CircleShape | LineShape | TextShape;
+// Single Shape type for all possible shapes
+export type Shape =
+  | PencilShape
+  | LineShape
+  | CircleShape
+  | TextShape;
